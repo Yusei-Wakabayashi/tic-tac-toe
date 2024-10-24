@@ -24,3 +24,5 @@ Route::get('/room/check', 'App\Http\Controllers\GameController@checkroom');
 Route::get('/session/get', 'App\Http\Controllers\GameController@session');
 //どんな状態でも参加可能なroomを1つ作成する
 Route::get('/room/create', 'App\Http\Controllers\GameController@createroom');
+//渡されたroomidの状態を戦闘状態にする
+Route::POST('/room/change/battle', 'App\Http\Controllers\GameController@changebattle');

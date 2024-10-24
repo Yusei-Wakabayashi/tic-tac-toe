@@ -8,6 +8,7 @@
 <body>
 <form action="{{ url('/room/check') }}" method="GET">
     {{csrf_field()}}
+    <h1>tic-tac-toe</h1>
     <button type="submit" class="add">マッチング</button>
 </form>
 </body>

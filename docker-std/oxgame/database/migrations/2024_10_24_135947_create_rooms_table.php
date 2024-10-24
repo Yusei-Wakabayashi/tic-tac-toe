@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('roomid');
             $table->string('user1_session',255)->nullable(false);
             $table->string('user2_session',255)->nullable();
-            $table->integer('battlenow')->default(false);
+            $table->integer('roomsitu')->default(false);
             $table->timestamps();
         });
     }

@@ -15,6 +15,17 @@ class GameController extends Controller
         $data = $room_object->getrooms();
         return $data;//参加可能なroomがあれば1件のデータを返す
     }
+    public function addrooms(Request $request)
+    {
+        $romm_object = new Room;
+        $session = $request->cookie->get("laravel_session");
+        $addroom_data = GameController::getrooms();
+        if ($addroom_data)
+        {
+            //参加可能なroomがあればプレイヤーがどんな状態でもroomに参加
+            $room_object->addroomm($addroom_data['roomid'], $session);
+        }
+    }
     public function nowbattleroom($usersession)
     {
         $room_object = new Room;
@@ -75,6 +86,8 @@ class GameController extends Controller
         {
             //roomに参加する処理
             $room_object->addroom($getroom['roomid'], $session);
+            //roomの状態を戦闘に移行する処理
+            $room_object->changebattle($getroom['roomid']);
             return view('matching');
         }
         else
@@ -83,5 +96,14 @@ class GameController extends Controller
             $room_object->createroom($request->cookies->get("laravel_session"));
             return view('matching');
         }
+    }
+    public function changebattle(Request $request)
+    {
+        $room_object = new Room;
+        $session = $request->cookie->get("laravel_session");
+        $roomid = $request->roomid;
+        //渡されたroomidのroomを戦闘状態に移行する
+        $room_object->changebattle($roomid);
+        return view('matching');
     }
 }

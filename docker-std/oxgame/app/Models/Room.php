@@ -13,7 +13,7 @@ class Room extends Model
     protected $fillable = [
         'user1_session',
         'user2_session',
-        'battlenow'
+        'roomsitu'
     ];
 
     public function getrooms()
@@ -38,7 +38,7 @@ class Room extends Model
         //待機状態にあるroomの取得
         Room::where('user1_session', '=', "$usersession")
             ->orWhere('user2_session', '=', "$usersession")
-            ->where('battlenow', '=', 0)
+            ->where('roomsitu', '=', 0)
             ->get();
     }
     public function nowbattleroom($usersession)
@@ -46,7 +46,15 @@ class Room extends Model
         //戦闘状態のroomの取得
         Room::where('user2_session', '=', "$usersession")
             ->orWhere('user1_session', '=', "$usersession")
-            ->where('battlenow', '=', 1)
+            ->where('roomsitu', '=', 1)
             ->get();
+    }
+    public function changebattle($roomid)
+    {
+        //roomの状態を戦闘状態に移行
+        Room::where('roomid', '=', "$roomid")
+            ->update([
+                'roomsitu' => 1
+            ]);
     }
 }

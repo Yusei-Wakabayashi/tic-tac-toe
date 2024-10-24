@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app-sdt:
-    container_name: app-sdt
+    container_name: app-oxgame
     build: ./docker/php
     volumes:
       - ./:/var/www
@@ -10,7 +10,7 @@ services:
       - ./log:/var/log
 
   nginx-sdt:
-    container_name: nginx-sdt
+    container_name: nginx-oxgame
     image: nginx
     ports:
       - "127.0.0.1:8880:80"
@@ -21,7 +21,7 @@ services:
   # .envファイルの「DB_HOST」とサービス名を合わせる
   db-sdt:
     image: mysql:latest
-    container_name: db-sdt
+    container_name: db-oxgame
     environment:
       MYSQL_ROOT_PASSWORD: root
       # .envファイルの「DB_DATABASE」とMYSQL_DATABASEを合わせる

@@ -86,7 +86,7 @@ class GameController extends Controller
         {
             //roomに参加する処理
             $room_object->addroom($getroom['roomid'], $session);
-            //roomの状態を戦闘に移行する処理
+            //roomsituの値をを戦闘に移行する処理
             $room_object->changebattle($getroom['roomid']);
             return view('matching');
         }
@@ -102,7 +102,7 @@ class GameController extends Controller
         $room_object = new Room;
         $session = $request->cookie->get("laravel_session");
         $roomid = $request->roomid;
-        //渡されたroomidのroomを戦闘状態に移行する
+        //渡されたroomidのroomsituを戦闘状態に移行する
         $room_object->changebattle($roomid);
         return view('matching');
     }
